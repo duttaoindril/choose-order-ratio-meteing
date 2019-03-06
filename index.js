@@ -1,9 +1,11 @@
 const assignPortions = (ratios, total) => {
-  console.log("=============================================");
   let finalRatios = {};
-  if (ratios && total > -1) {
-    console.log("total", total, "ratios", ratios);
-    finalRatios = { wow: "wow" };
+  const ratioTotal = Object.keys(ratios).length
+    ? Object.values(ratios).reduce((a, b) => a + b, 0)
+    : 0;
+  if (ratioTotal === 0 && total > -1) {
+    console.log('total', total, 'ratios', ratios, 'ratioTotal', ratioTotal);
+    finalRatios = { wow: 'wow' };
   }
   return finalRatios;
 };
@@ -18,12 +20,13 @@ const objectEquals = (x, y) =>
       Object.keys(x).every(i => objectEquals(x[i], y[i]));
 
 console.log(
-  "All tests passed:",
+  'All tests passed:',
   runTests(
     assignPortions,
     (a, b) => {
       let equal = objectEquals(a, b);
       console.log(a, b, equal);
+      console.log('=============================================');
       return equal;
     },
     [
